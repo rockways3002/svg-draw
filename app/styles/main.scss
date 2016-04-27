@@ -1,0 +1,133 @@
+$icon-font-path: '../fonts/';
+
+@mixin draw($from, $to, $color) {
+	from {
+		stroke-dashoffset: $from;
+	}
+	to {
+		stroke-dashoffset: $to;
+	}
+	0% {
+		opacity: 0;
+		stroke: $color;
+	}
+	33% {
+		opacity: 0.25;
+		stroke: $color;
+	}
+	66% {
+		opacity: 0.5;
+		stroke: $color;
+	}
+	100% {
+		opacity: 1;
+		stroke: $color;
+	}
+}
+@keyframes displayItem {
+	0% {
+		opacity: 0;
+		color: #fff;
+	}
+	33% {
+		opacity: 0.25;
+		color: #fff;
+	}
+	66% {
+		opacity: 0.5;
+		color: #fff;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+html, body {
+	min-height: 100%;
+}
+body {
+	background-color: #1d2c3f;
+	background-image: url("../images/full-background.jpg");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+.wrapper {
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 100px;
+}
+.chart {
+	background: #243346;
+	border-radius: 50%;
+	-webkit-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	position: relative;
+	&:not(:root) {
+		overflow: visible;
+	}
+}
+text {
+	fill: #fff;
+	font-size: 1.5em;
+}
+.text-number {
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+	font-size: 0.75em;
+	opacity: 0;
+	animation: displayItem 1s linear forwards;
+	&.text-design {		
+		-webkit-animation-delay: 2.25s; 
+		animation-delay: 2.25s;
+	}
+	&.text-front-end {		
+		-webkit-animation-delay: 0.5s; 
+		animation-delay: 0.5s;
+	}
+	&.text-back-end {		
+		-webkit-animation-delay: 1.5s; 
+		animation-delay: 1.5s;
+	}
+}
+.pie {
+	fill: none;
+	stroke: none;
+	stroke-width: 20px;
+	stroke: #354357;
+	&.front-end {
+		stroke-dasharray: 157.079632679, 314.159265359;
+		animation: draw-front 1s linear forwards;
+	}
+	&.back-end {
+		stroke-dasharray: 125.663706144, 314.159265359;
+		animation: draw-back 1s linear forwards;
+		-webkit-animation-delay: 1s; 
+		animation-delay: 1s;
+	}
+	&.design {
+		stroke-dasharray: 31.4159265359, 314.159265359;
+		animation: design 0.5s linear forwards;
+		-webkit-animation-delay: 2s; 
+		animation-delay: 2s;
+	}
+}
+.text-content {
+	fill: #fff;
+	-webkit-transform: rotate(-270deg);
+	transform: rotate(-270deg);
+	font-size: 1.5em;
+	text-anchor: middle;
+}
+
+@keyframes draw-front {
+	@include draw(157.079632679, 0,  #ffc875);
+}
+@keyframes draw-back {
+	@include draw(0, -157.079632679,  #f3595b);
+}
+@keyframes design {
+	@include draw(0, -282.743338823,  #83d7c0);
+}
+
